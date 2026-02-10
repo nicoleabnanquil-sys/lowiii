@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1224</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family: Georgia, serif;
+}
+
+body{
+    margin:0;
+    background:#FFF4B8;
+    overflow-x:hidden;
+}
+
+/* SCENE */
+.scene{
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+.scene{
+	min-height: 100svh;
+}
+/* LETTER */
+.letter{
+    position:absolute;
+    left:50%;
+    bottom:140px;
+    transform:translateX(-50%);
+    width:300px;
+    height:170px;
+    background:#fffdf5;
+    border-radius:16px;
+    padding:28px 22px;
+    overflow:hidden;
+    box-shadow:0 14px 35px rgba(0,0,0,0.18);
+    transition:all 1.2s ease;
+    z-index:1;
+    -webkit-overflow-scrolling:touch;
+}
+
+/* OPEN LETTER = FULL PAGE */
+.scene.open .letter{
+    width:90vw;
+    height:85vh;
+    bottom:50%;
+    transform:translate(-50%, 50%);
+    overflow-y:auto;
+}
+
+/* LETTER TEXT */
+.letter p{
+    font-size:15px;
+    line-height:1.8;
+    margin-bottom:18px;
+    color:#333;
+}
+
+.question{
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+    margin-top:30px;
+}
+
+.sign{
+    text-align:right;
+    margin-top:25px;
+    font-style:italic;
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+    position:sticky;
+    top:0;
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:10px;
+}
+
+.close-btn button{
+    background:none;
+    border:none;
+    font-size:22px;
+    cursor:pointer;
+    color:#9b7b2f;
+}
+
+/* ENVELOPE */
+.envelope{
+    position:absolute;
+    left:50%;
+    bottom:140px;
+    transform:translateX(-50%);
+    width:300px;
+    height:180px;
+    background:#E9C46A;
+    border-radius:16px;
+    cursor:pointer;
+    z-index:2;
+    transition:transform 1.2s ease;
+}
+
+.envelope{
+	touch-action: manipulation;
+}
+
+/* ENVELOPE DROP */
+.scene.open .envelope{
+    transform:translate(-50%, 280px);
+}
+
+/* FLAP */
+.flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:150px solid transparent;
+    border-right:150px solid transparent;
+    border-top:90px solid #DDB65C;
+    transform-origin:top;
+    transition:transform 1.2s ease;
+}
+
+.scene.open .flap{
+    transform:rotateX(180deg);
+}
+
+/* HINT */
+.hint{
+    position:absolute;
+    bottom:80px;
+    width:100%;
+    text-align:center;
+    font-size:14px;
+    color:#8a6f2f;
+}
+
+/* MOBILE TWEAKS */
+@media (max-width:480px){
+    .letter p{ font-size:14px; }
+    .question{ font-size:16px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene" id="scene">
+
+    <div class="letter">
+        <div class="close-btn">
+            <button id="close">✕</button>
+        </div>
+
+        <p>
+        happy valentine's day, mahal ko! nais ko lamang ibigay sa iyo itong site na
+        pinagaralan ko talagang gawin. ito ay simpleng gesture o pag-espress ng
+        pagmamahal ko sa iyo pero sana magustuhan mo.
+        </p>
+
+        <p>
+        kahit na nasa mahirap at masakit na sitwasyon tayo ngayon, hinding hindi pa rin
+        kita kalilimutang piliin at mahalin. kung may mga pagkukulang man ako, patuloy kong inaayos ang sarili ko. hindi dahil perpekto ako, kundi dahil mahal kita at gusto kong maging mas mabuti para sa’yo.
+        </p>
+
+        <p>
+        alam kong tayo ay nagccool off ngayon pero hindi ito hadlang para maitigil ang
+        pagpaparamdam ko sa iyo ng pagmamahal ko, isa na rito ang efforts ko.
+        isa na itong binigay kong site na ito sa mga iyon.
+        </p>
+
+        <p>
+        kung nag-aalinlangan ka man ngayon, gusto kong malaman mo na handa akong maghintay. hindi bilang obligasyon, kundi dahil ikaw iyon. at dahil araw-araw akong malayang pumili, sa lahat ng iyon, ikaw ang pinili ko. hindi dahil sa madali, hindi dahil sa "ikaw lamang ang nandiyan" kundi dahil naramdaman ko na totoo ang nararamdaman kong kasiyahan at pagmamahal sa iyo. 
+        <p>
+        nais muli kitang tanungin, nang mas maayos at mas genuine.
+        </p>
+
+        <p class="question">
+        maaari ba akong maging valentine mo?
+        </p>
+
+        <p class="sign">
+        — love, nicole 💙
+        </p>
+    </div>
+
+    <div class="envelope" id="envelope">
+        <div class="flap"></div>
+    </div>
+
+    <div class="hint">hi, lowi ;)</div>
+
+</div>
+
+<audio id="music" src="rainbow gal by cavetown  lyric video.mp3"></audio>
+
+<script>
+const scene = document.getElementById("scene");
+const envelope = document.getElementById("envelope");
+const closeBtn = document.getElementById("close");
+const music = document.getElementById("music");
+
+envelope.addEventListener("click", () => {
+    scene.classList.add("open");
+    music.muted = false;
+    music.play().catch(() => {});
+
+});
+
+closeBtn.addEventListener("click", () => {
+    scene.classList.remove("open");
+    music.pause();
+    music.currentTime = 0;
+});
+</script>
+
+</body>
+</html>
