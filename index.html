@@ -111,6 +111,15 @@ body{
 	touch-action: manipulation;
 }
 
+.envelope{
+    border:none;
+    padding:0;
+    background:#E9C46A;
+}
+.envelope:focus{
+    outline:none;
+}
+	
 /* ENVELOPE DROP */
 .scene.open .envelope{
     transform:translate(-50%, 280px);
@@ -193,9 +202,9 @@ body{
         </p>
     </div>
 
-    <div class="envelope" id="envelope">
-        <div class="flap"></div>
-    </div>
+    <button class="envelope" id="envelope">
+    <div class="flap"></div>
+</button>
 
     <div class="hint">hi, lowi ;)</div>
 
