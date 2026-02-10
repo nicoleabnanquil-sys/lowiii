@@ -153,6 +153,14 @@ body{
     color:#8a6f2f;
 }
 
+.music-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    z-index:999;
+}
+
+	
 /* MOBILE TWEAKS */
 @media (max-width:480px){
     .letter p{ font-size:14px; }
@@ -202,10 +210,11 @@ body{
         </p>
     </div>
 
-    <button class="envelope" id="envelope">
-    <div class="flap"></div>
+    <button id="playMusicBtn" class="music-btn">
+enable music ♫
 </button>
 
+	
     <div class="hint">hi, lowi ;)</div>
 
 </div>
@@ -255,6 +264,19 @@ closeBtn.addEventListener("click", () => {
     music.pause();
     music.currentTime = 0;
 });
+
+const playBtn = document.getElementById("playMusicBtn");
+
+playBtn.addEventListener("click", () => {
+    music.play()
+        .then(() => {
+            playBtn.style.display = "none";
+        })
+        .catch(err => {
+            console.log("Audio blocked:", err);
+        });
+});
+
 </script>
 
 
