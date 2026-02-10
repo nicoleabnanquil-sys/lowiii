@@ -210,7 +210,7 @@ body{
 
 </div>
 
-<audio id="music" src="rainbow.mp3" preload="auto"></audio>
+<audio id="music" src="rainbow.mp3" preload="auto" loop></audio>
 
 <script>
 const scene = document.getElementById("scene");
@@ -218,24 +218,45 @@ const envelope = document.getElementById("envelope");
 const closeBtn = document.getElementById("close");
 const music = document.getElementById("music");
 
-// OPEN LETTER + PLAY MUSIC (iOS SAFE)
-envelope.addEventListener("click", () => {
+let audioUnlocked = false;
+
+// 🔓 UNLOCK AUDIO (iOS REQUIRED)
+function unlockAudio() {
+    if (audioUnlocked) return;
+
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
+
+    const source = audioCtx.createMediaElementSource(music);
+    source.connect(audioCtx.destination);
+
+    audioCtx.resume().then(() => {
+        audioUnlocked = true;
+    });
+}
+
+// OPEN LETTER + PLAY MUSIC
+function openLetter() {
+    unlockAudio();
+
     scene.classList.add("open");
 
     music.currentTime = 0;
-    music.play().catch(() => {
-        console.log("iOS blocked autoplay");
-    });
-});
+    music.play().catch(() => {});
+}
 
-// CLOSE LETTER + STOP MUSIC
+// EVENTS (touch + click)
+envelope.addEventListener("touchstart", openLetter);
+envelope.addEventListener("click", openLetter);
+
+// CLOSE LETTER
 closeBtn.addEventListener("click", () => {
     scene.classList.remove("open");
-
     music.pause();
     music.currentTime = 0;
 });
 </script>
+
 
 
 </body>
