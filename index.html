@@ -201,7 +201,7 @@ body{
 
 </div>
 
-<audio id="music" src="rainbow gal by cavetown  lyric video.mp3"></audio>
+<audio id="music" src="rain.mp3"></audio>
 
 <script>
 const scene = document.getElementById("scene");
@@ -209,19 +209,25 @@ const envelope = document.getElementById("envelope");
 const closeBtn = document.getElementById("close");
 const music = document.getElementById("music");
 
+// OPEN LETTER + PLAY MUSIC (iOS SAFE)
 envelope.addEventListener("click", () => {
     scene.classList.add("open");
-    music.muted = false;
-    music.play().catch(() => {});
 
+    music.currentTime = 0;
+    music.play().catch(() => {
+        console.log("iOS blocked autoplay");
+    });
 });
 
+// CLOSE LETTER + STOP MUSIC
 closeBtn.addEventListener("click", () => {
     scene.classList.remove("open");
+
     music.pause();
     music.currentTime = 0;
 });
 </script>
+
 
 </body>
 </html>
